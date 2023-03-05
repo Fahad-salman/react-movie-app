@@ -3,8 +3,10 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
+import PaginationHolder from '../Pagination/PaginationHolder';
 
-const CardList = ({ movies }) => {
+const CardList = ({ movies ,getPage,page}) => {
+    
     return (
         <Row className="g-4 justify-content-center">
             {movies.length >= 1 ? (movies.map((mov) => {
@@ -34,6 +36,7 @@ const CardList = ({ movies }) => {
             })) : <Col>
                 <h2 className='text-center' >no data found</h2>
             </Col>}
+            <PaginationHolder getPage={getPage} page={page} />
         </Row>
     )
 }

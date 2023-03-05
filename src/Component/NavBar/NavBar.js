@@ -1,7 +1,7 @@
 import React from 'react'
 import { Row , Navbar, Container ,Form ,Nav} from 'react-bootstrap'
 
-const NavBar = ({getBySearch,getPupularMovies,getUpComingMovies}) => {
+const NavBar = ({getBySearch,getPupularMovies,getUpComingMovies,getTopMovies}) => {
 
     const onSearch = (e) => {
         getBySearch(e)
@@ -15,11 +15,15 @@ const NavBar = ({getBySearch,getPupularMovies,getUpComingMovies}) => {
       getUpComingMovies()
     }
 
+    const radomChosenMovies =()=>{
+      Math.floor(Math.random() * [getTopMovies(),getPupularMovies(),getUpComingMovies()]);
+    }
+
   return (
     <Row className='mb-5'>
        <Navbar bg="dark" expand="lg" variant='dark'className='px-2' >
       <Container >
-        <Navbar.Brand >Movie App</Navbar.Brand>
+        <Navbar.Brand onClick={()=>radomChosenMovies()} >Movie App</Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
           <Nav
