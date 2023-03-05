@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from 'react'
-import { Button } from 'react-bootstrap'
+import { Card, Button } from 'react-bootstrap';
 import { Link ,useParams} from 'react-router-dom'
 import axios from 'axios'
 
@@ -17,21 +17,26 @@ const MovieDetails = () => {
         console.log(moviee.original_title+'<')
     // eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
-
+    const name = moviee.original_title
+    const overview = moviee.overview
+    const rate = moviee.vote_average
+    const date = moviee.release_date
+    const imagePath = 'https://image.tmdb.org/t/p/original/'+moviee.poster_path
   return (
-    <div>
-    MovieDetails <br/>
-    imagePath : {moviee.poster_path}<br/>
-    name : {moviee.original_title}<br/>
-    Date : {moviee.release_date}<br/>
-    Rate : {moviee.vote_average} <br/>
-    OverView : {moviee.overview}<br/> 
-    <Link to='/' >
-    <Button variant='dark' >
-        Back
-    </Button>
-    </Link>
+    <Card className="movie-card">
+    <div className="movie-image-container">
+      <img className="movie-image" src={imagePath} alt={name} />
+      <div className="movie-rate">{rate}</div>
     </div>
+    <Card.Body className="movie-details">
+      <Card.Title>{name}</Card.Title>
+      <Card.Text>{overview}</Card.Text>
+      <Card.Text>Date: {date}</Card.Text>
+      <Link to='/' >
+      <Button variant="dark">Back Stap</Button>
+      </Link>
+    </Card.Body>
+  </Card>
   )
 }
 
