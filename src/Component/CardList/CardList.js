@@ -4,11 +4,14 @@ import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import PaginationHolder from '../Pagination/PaginationHolder';
+import { Link } from 'react-router-dom';
 
 const CardList = ({ movies ,getPage,page}) => {
-    
+   
     return (
+        
         <Row className="g-4 justify-content-center">
+
             {movies.length >= 1 ? (movies.map((mov) => {
                 const id = mov.id;
                 const movieName = mov.original_title
@@ -27,8 +30,8 @@ const CardList = ({ movies ,getPage,page}) => {
                           
                             <Card.Text className='desc' >
                                 {overview}
-                            </Card.Text>
-                            <Button variant="dark"  >Go somewhere</Button>
+                            </Card.Text><Link to={`/movieDetails/${id}`} >
+                            <Button variant="dark"  >Go somewhere</Button> </Link>
                         </Card.Body>
                     </Card>
                    </Col>
@@ -36,8 +39,10 @@ const CardList = ({ movies ,getPage,page}) => {
             })) : <Col>
                 <h2 className='text-center' >no data found</h2>
             </Col>}
-            <PaginationHolder getPage={getPage} page={page} />
+            {movies.length >= 1? (<PaginationHolder getPage={getPage} page={page} />):null}
+            
         </Row>
+       
     )
 }
 
