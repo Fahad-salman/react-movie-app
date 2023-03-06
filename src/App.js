@@ -5,7 +5,7 @@ import Footer from './Component/Footer/Footer';
 import CardList from './Component/CardList/CardList';
 import MovieDetails from './Component/MovieDetails/MovieDetails';
 import axios from 'axios';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 
 function App() {
 
@@ -68,13 +68,11 @@ function App() {
       />
 
       <Container>
-        <BrowserRouter>
           <Routes>
           <Route path='/' element={<CardList movies={movies} getPage={getPage} page={page} />} />
             <Route path='/movieDetails/:id' element={<MovieDetails/>} />
             
           </Routes>
-        </BrowserRouter>
       </Container>
 
       <Footer />

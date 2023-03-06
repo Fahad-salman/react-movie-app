@@ -1,5 +1,6 @@
 import React from 'react'
 import { Row , Navbar, Container ,Form ,Nav} from 'react-bootstrap'
+import { Link } from 'react-router-dom'
 
 const NavBar = ({getBySearch,getPupularMovies,getUpComingMovies,getTopMovies}) => {
 
@@ -15,15 +16,17 @@ const NavBar = ({getBySearch,getPupularMovies,getUpComingMovies,getTopMovies}) =
       getUpComingMovies()
     }
 
-    const radomChosenMovies =()=>{
-      Math.floor(Math.random() * [getTopMovies(),getPupularMovies(),getUpComingMovies()]);
-    }
+    // const radomChosenMovies =()=>{
+    //   Math.floor(Math.random() * [getTopMovies(),getPupularMovies(),getUpComingMovies()]);
+    // }
 
   return (
     <Row className='mb-5'>
        <Navbar bg="dark" expand="lg" variant='dark'className='px-2' >
       <Container >
-        <Navbar.Brand onClick={()=>radomChosenMovies()} >Movie App</Navbar.Brand>
+    <Link to='/'>
+        <Navbar.Brand >Movie App</Navbar.Brand>
+    </Link>
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
           <Nav
