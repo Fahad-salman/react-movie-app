@@ -1,12 +1,29 @@
-import React from 'react'
+import React,{useEffect,useState} from 'react';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import PaginationHolder from '../Pagination/PaginationHolder';
 import { Link } from 'react-router-dom';
+import { useDispatch ,useSelector} from 'react-redux';
+import { getTopMovie } from '../../redux/actions/movieAction';
 
-const CardList = ({ movies ,getPage,page}) => {
+const CardList = () => {
+
+const [movies, setMovies] = useState([])
+const [page, setPage] = useState(0)
+  
+const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(getTopMovie())
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+  const dataMovies = useSelector((state)=>state.movies)
+  
+  useEffect(()=>{
+    setMovies(dataMovies)
+    },[dataMovies])
+
    
     return (
         
@@ -31,7 +48,7 @@ const CardList = ({ movies ,getPage,page}) => {
                             <Card.Text className='desc' >
                                 {overview}
                             </Card.Text><Link to={`/movieDetails/${id}`} >
-                            <Button variant="dark"  >Go somewhere</Button> </Link>
+                            <Button variant="dark"  >See the movie</Button> </Link>
                         </Card.Body>
                     </Card>
                    </Col>
@@ -39,7 +56,9 @@ const CardList = ({ movies ,getPage,page}) => {
             })) : <Col>
                 <h2 className='text-center' >no data found</h2>
             </Col>}
-            {movies.length >= 1? (<PaginationHolder getPage={getPage} page={page} />):null}
+            {movies.length >= 1? (<PaginationHolder
+            //  getPage={getPage} 
+             page={page} />):null}
             
         </Row>
        

@@ -21,6 +21,7 @@ const MovieDetails = () => {
     const overview = moviee.overview
     const rate = moviee.vote_average
     const date = moviee.release_date
+    const homepage = moviee.homepage
     const imagePath = 'https://image.tmdb.org/t/p/original/'+moviee.poster_path
   return (
     <Card className="movie-card">
@@ -35,6 +36,7 @@ const MovieDetails = () => {
       <Link to='/' >
       <Button variant="dark">Back Stap</Button>
       </Link>
+      <Button className='mx-3' variant="dark" href={homepage}>Movie page</Button>
     </Card.Body>
   </Card>
   )

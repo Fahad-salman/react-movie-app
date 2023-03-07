@@ -1,24 +1,45 @@
-import React from 'react'
+import React,{useState} from 'react'
 import { Row , Navbar, Container ,Form ,Nav} from 'react-bootstrap'
 import { Link } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { getTopMovie,getMovieBysearch,getUpComingMovies,getPupularMovies } from '../../redux/actions/movieAction'
 
-const NavBar = ({getBySearch,getPupularMovies,getUpComingMovies,getTopMovies}) => {
+const NavBar = () => {
+
+  const dispatch = useDispatch()
 
     const onSearch = (e) => {
         getBySearch(e)
     }
 
+    // Get Movies by search
+  const getBySearch = async (search) => {
+    if (search === '') {
+      dispatch(getTopMovie())
+    } else {
+      dispatch(getMovieBysearch(search))
+    }
+  }
+
     const onClickPupularMovies=()=>{
-      getPupularMovies()
+      dispatch(getPupularMovies())
+    }
+    
+    const onClickTopMovies=()=>{
+      dispatch(getTopMovie())
     }
 
+    // Get upComing Movies 
     const onClickUpComingMovies=()=>{
-      getUpComingMovies()
+      dispatch(getUpComingMovies())
     }
 
     // const radomChosenMovies =()=>{
     //   Math.floor(Math.random() * [getTopMovies(),getPupularMovies(),getUpComingMovies()]);
     // }
+
+
+
 
   return (
     <Row className='mb-5'>
@@ -35,8 +56,9 @@ const NavBar = ({getBySearch,getPupularMovies,getUpComingMovies,getTopMovies}) =
             navbarScroll
           >
           </Nav>
-          <Nav.Link className='m-2' style={{color:'white'}} onClick={()=>onClickPupularMovies()} >Popular</Nav.Link>
-          <Nav.Link className='m-2' style={{color:'white'}} onClick={()=>onClickUpComingMovies()} >UpComing</Nav.Link>
+          <Nav.Link className='mx-3' style={{color:'white' , cursor:'pointer'}} onClick={()=>onClickPupularMovies()}>Popular</Nav.Link>
+          <Nav.Link className='mx-3' style={{color:'white' , cursor:'pointer'}} onClick={()=>onClickTopMovies()}>Top</Nav.Link>
+          <Nav.Link className='mx-3' style={{color:'white' , cursor:'pointer'}} onClick={()=>onClickUpComingMovies()} >UpComing</Nav.Link>
           <Form className="d-flex">
             <Form.Control
             style={{width: '310px'}}
